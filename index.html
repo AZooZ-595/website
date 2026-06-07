@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PIXELO — وكالة تصميم مواقع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-hero: #d6dde8;
+  --bg-light: #eaecf0;
+  --bg-white: #f4f5f7;
+  --bg-dark: #0d0d0d;
+  --text-dark: #0d0d0d;
+  --text-mid: #555;
+  --text-light: #999;
+  --accent: #F7FF9E;
+  --border-light: rgba(0,0,0,0.1);
+  --border-dark: rgba(255,255,255,0.1);
+  --card-bg: rgba(255,255,255,0.7);
+  --nav-h: 64px;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+  font-size: 1vw;
+}
+@media (min-width: 1440px) { html { font-size: 14.4px; } }
+@media (max-width: 700px)  { html { font-size: 2vw; } }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-dark);
+  background: var(--bg-hero);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════
+   NAV — dark bar + big yellow CTA
+═══════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  background: var(--bg-dark);
+  display: flex; align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  padding: 0 1.8em;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: 1.1em;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  direction: ltr;
+}
+
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+  height: 100%;
+}
+.nav-links li { height: 100%; }
+.nav-links a {
+  display: flex; align-items: center; height: 100%;
+  padding: 0 1.6em;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.82em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+.nav-links a:hover { color: #fff; }
+
+/* The big yellow CTA block */
+.nav-cta {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+.nav-cta-dummy {
+  padding: 0 1.8em;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--bg-dark);
+  white-space: nowrap;
+  pointer-events: none;
+  height: 100%;
+  display: flex; align-items: center;
+}
+.nav-cta-real {
+  position: absolute; inset: 0;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg-dark);
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 700;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  padding: 0 1.8em;
+}
+.nav-cta-real:hover { opacity: 0.88; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-logo { font-size: 1.3em; }
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  background: linear-gradient(175deg, #c8d3e0 0%, #d6dde8 40%, #dde3ec 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* subtle grid lines like the reference */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.hero-heading-area {
+  padding: 3.5em 2.5em 0;
+}
+
+.hero-h1 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 9.5vw, 9.5em);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  opacity: 0;
+}
+.hero-h1 .word-2 {
+  color: rgba(0,0,0,0.3);
+}
+
+.hero-sub-row {
+  margin-top: 1.8em;
+  padding: 0 2.5em;
+  max-width: 520px;
+  opacity: 0;
+}
+.hero-sub-row p {
+  font-size: 1em;
+  color: rgba(0,0,0,0.5);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* ─── Node cards area ─────────────────── */
+.hero-nodes-area {
+  flex: 1;
+  position: relative;
+  min-height: 420px;
+  margin-top: 3em;
+}
+
+.hero-svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero-svg path {
+  stroke: #b0b8c5;
+  stroke-width: 1.5;
+  fill: none;
+}
+.hero-svg circle {
+  fill: #fff;
+  stroke: #b0b8c5;
+  stroke-width: 1.5;
+}
+
+/* node cards — white, rounded, shadow */
+.ncard {
+  position: absolute;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  cursor: grab;
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+.ncard:active { cursor: grabbing; }
+.ncard:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.18); }
+
+.ncard-header {
+  padding: 0.55em 0.9em;
+  display: flex; align-items: center; gap: 0.5em;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.ncard-tag {
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  direction: ltr;
+}
+.ncard-name {
+  font-size: 0.6em;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  direction: ltr;
+}
+.ncard-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ncard-img-wrap {
+  overflow: hidden;
+}
+
+/* card dot connectors */
+.conn-dot {
+  width: 12px; height: 12px;
+  background: #fff;
+  border: 2px solid #c0c8d0;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+/* specific node positions */
+#nc-3d    { width: 180px; top: 30px;  left: 4%;  }
+#nc-color { width: 200px; top: 250px; left: 1%;  }
+#nc-img   { width: 230px; top: 60px;  left: 26%; }
+#nc-text  { width: 200px; top: 220px; left: 52%; }
+#nc-flux  { width: 180px; top: 320px; left: 44%; }
+#nc-video { width: 240px; top: 30px;  right: 2%; }
+
+.nc-3d-img    { height: 140px; }
+.nc-color-img { height: 100px; }
+.nc-img-img   { height: 200px; }
+.nc-text-body { padding: 0.8em; font-size: 0.72em; color: var(--text-mid); line-height: 1.55; direction: rtl; min-height: 80px; }
+.nc-flux-img  { height: 130px; }
+.nc-video-img { height: 200px; }
+
+/* gradient placeholders for node images */
+.grad-3d    { background: linear-gradient(145deg,#e8e0d8 0%,#d0c8bf 100%); }
+.grad-color { background: linear-gradient(145deg,#1a1a2e 30%,#7c6fa0 100%); }
+.grad-img   { background: linear-gradient(160deg,#c5c9d0 0%,#8a9bb0 100%); }
+.grad-flux  { background: linear-gradient(145deg,#1c2333 0%,#3a4a65 100%); }
+.grad-video { background: linear-gradient(145deg,#c8cdd5 0%,#9aa3b0 100%); }
+
+/* mannequin-like silhouette shapes using CSS */
+.silhouette {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.sil-3d {
+  width: 70px; height: 90px;
+  background: #d4ccc4;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 -10px 0 8px #d4ccc4;
+}
+.sil-person {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.sil-head {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+}
+.sil-body {
+  width: 60px; height: 80px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.2);
+}
+.sil-bird {
+  position: absolute;
+  bottom: 15%; right: 10%;
+  width: 40px; height: 30px;
+  background: #1a2a40;
+  border-radius: 50% 60% 40% 30%;
+}
+.bird-beak {
+  position: absolute;
+  right: -8px; top: 8px;
+  width: 12px; height: 5px;
+  background: #2a3a50;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* ═══════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════ */
+.marquee-wrap {
+  background: var(--bg-dark);
+  overflow: hidden;
+  padding: 1em 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.marquee-track {
+  display: flex;
+  animation: scrollLeft 22s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.m-item {
+  padding: 0 2.5em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: inline-flex; align-items: center; gap: 2em;
+}
+.m-sep { color: var(--accent); }
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════
+   SERVICES — dark bg, color-switching list
+═══════════════════════════════════════ */
+.services-section {
+  background: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* dynamic gradient layer */
+.srv-gradient {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.srv-grad-item {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.srv-grad-item.active { opacity: 0.2; }
+.sg1 { background: radial-gradient(ellipse at 65% 50%, #6b21a8, transparent 65%); }
+.sg2 { background: radial-gradient(ellipse at 65% 50%, #1d4ed8, transparent 65%); }
+.sg3 { background: radial-gradient(ellipse at 65% 50%, #dc2626, transparent 65%); }
+.sg4 { background: radial-gradient(ellipse at 65% 50%, #0d9488, transparent 65%); }
+.sg5 { background: radial-gradient(ellipse at 65% 50%, #d97706, transparent 65%); }
+.sg6 { background: radial-gradient(ellipse at 65% 50%, #16a34a, transparent 65%); }
+
+.srv-overlay-t {
+  position: absolute; top: 0; inset-inline: 0; height: 180px;
+  background: linear-gradient(to bottom, var(--bg-dark), transparent);
+  z-index: 1; pointer-events: none;
+}
+.srv-overlay-b {
+  position: absolute; bottom: 0; inset-inline: 0; height: 180px;
+  background: linear-gradient(to top, var(--bg-dark), transparent);
+  z-index: 1; pointer-events: none;
+}
+
+.srv-inner {
+  position: relative; z-index: 2;
+  max-width: 1400px; margin: 0 auto;
+  padding: 8em 3em;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6em;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .srv-inner { grid-template-columns: 1fr; gap: 3em; }
+}
+
+.srv-left { position: sticky; top: calc(var(--nav-h) + 2em); }
+.srv-eyebrow {
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8em;
+}
+.srv-h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 4.5vw, 4.5em);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.srv-desc {
+  margin-top: 1.2em;
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.7;
+  max-width: 30ch;
+}
+
+.srv-list { display: flex; flex-direction: column; }
+
+.srv-item {
+  padding: 1.8em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  cursor: default;
+}
+.srv-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+
+.srv-name {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 3.8vw, 3.6em);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.2);
+  transition: color 0.12s ease;
+}
+.srv-item.active .srv-name { color: var(--accent); }
+.srv-item:hover .srv-name  { color: rgba(255,255,255,0.6); }
+.srv-item.active:hover .srv-name { color: var(--accent); }
+
+.srv-sub {
+  font-size: 0.82em;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.4em;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+.srv-item.active .srv-sub { max-height: 3em; opacity: 1; }
+
+/* ═══════════════════════════════════════
+   TOOLS — light bg, floating chips + center image
+═══════════════════════════════════════ */
+.tools-section {
+  background: var(--bg-white);
+  padding: 8em 0 5em;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.tools-eyebrow {
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  margin-bottom: 0.8em;
+}
+.tools-h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 4em);
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  line-height: 1.1;
+  margin-bottom: 0.3em;
+}
+.tools-sub {
+  font-size: 0.9em;
+  color: var(--text-mid);
+  margin-bottom: 4em;
+}
+
+.tools-stage {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tools-center-img {
+  width: 280px; height: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 5;
+  background: linear-gradient(160deg, #d4c9be 0%, #b8a898 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.tools-center-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.15), transparent 60%);
+}
+
+/* pottery silhouette */
+.pottery {
+  width: 160px; height: 140px;
+  position: relative;
+}
+.pottery-body {
+  width: 140px; height: 90px;
+  background: radial-gradient(ellipse at 35% 40%, #c8b8a8, #8a7060);
+  border-radius: 50% 50% 45% 45%;
+  position: absolute; bottom: 0; left: 10px;
+  box-shadow: inset -15px -8px 25px rgba(0,0,0,0.2);
+}
+.pottery-neck {
+  width: 40px; height: 35px;
+  background: linear-gradient(180deg, #b0a090, #c8b8a8);
+  border-radius: 4px 4px 0 0;
+  position: absolute;
+  bottom: 85px; left: 60px;
+}
+.pottery-base {
+  width: 60px; height: 12px;
+  background: #7a6858;
+  border-radius: 2px;
+  position: absolute;
+  bottom: -8px; left: 50px;
+}
+.pottery-highlight {
+  width: 30px; height: 60px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 25px; left: 28px;
+  transform: rotate(-15deg);
+}
+
+/* chip tags floating around the center */
+.chip-tag {
+  position: absolute;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 100px;
+  padding: 0.45em 1.1em;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  z-index: 10;
+}
+.chip-tag:hover, .chip-tag.active {
+  background: var(--text-dark);
+  border-color: var(--text-dark);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.chip-tag.is-accent { background: #ffe4d6; border-color: #ffb89a; color: #8a3010; }
+.chip-tag.is-accent:hover { background: var(--text-dark); border-color: var(--text-dark); color: #fff; }
+
+/* chip positions (absolute in .tools-stage) */
+.ct-crop     { top: 15%;  left: 4%; }
+.ct-invert   { top: 28%;  left: 20%; }
+.ct-outpaint { top: 40%;  left: 10%; }
+.ct-inpaint  { top: 58%;  left: 5%; }
+.ct-mask     { top: 72%;  left: 18%; }
+.ct-upscale  { bottom: 8%; left: 12%; }
+
+.ct-painter  { top: 15%;  right: 4%; }
+.ct-channels { top: 30%;  right: 12%; }
+.ct-describer{ top: 45%;  right: 5%; }
+.ct-relight  { top: 62%;  right: 8%; }
+.ct-zdepth   { bottom: 10%; right: 14%; }
+
+/* ═══════════════════════════════════════
+   PORTFOLIO
+═══════════════════════════════════════ */
+.portfolio-section {
+  background: var(--bg-light);
+  padding: 8em 3em;
+}
+.portfolio-section .section-head {
+  max-width: 1400px; margin: 0 auto 3em;
+}
+.sec-eyebrow {
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  margin-bottom: 0.6em;
+}
+.sec-h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 4em);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-dark);
+}
+
+.port-grid {
+  max-width: 1400px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2em;
+}
+@media (max-width: 900px) { .port-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .port-grid { grid-template-columns: 1fr; } }
+
+.port-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.port-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+}
+.port-img {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.port-img-inner {
+  width: 100%; height: 100%;
+  transition: transform 0.4s ease;
+}
+.port-card:hover .port-img-inner { transform: scale(1.04); }
+.port-img-label {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5em;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(255,255,255,0.18);
+  font-family: 'Cairo', sans-serif;
+}
+.pi1 { background: linear-gradient(145deg,#1a1a2e,#16213e); }
+.pi2 { background: linear-gradient(145deg,#1a0533,#2d1b69); }
+.pi3 { background: linear-gradient(145deg,#001219,#005f73); }
+.pi4 { background: linear-gradient(145deg,#0d1b2a,#415a77); }
+.pi5 { background: linear-gradient(145deg,#1a0000,#800000); }
+.pi6 { background: linear-gradient(145deg,#0a1628,#243b55); }
+
+.port-body { padding: 1.3em 1.4em; }
+.port-chips { display: flex; gap: 0.5em; flex-wrap: wrap; margin-bottom: 0.7em; }
+.pchip {
+  padding: 0.25em 0.75em;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 100px;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.pchip:hover { background: var(--text-dark); color: #fff; border-color: var(--text-dark); }
+.port-title { font-weight: 800; font-size: 1.1em; margin-bottom: 0.3em; letter-spacing: -0.01em; }
+.port-desc  { font-size: 0.82em; color: var(--text-mid); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════ */
+.process-section {
+  background: var(--bg-white);
+  padding: 8em 3em;
+}
+.process-inner { max-width: 1400px; margin: 0 auto; }
+
+.proc-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 0.5em;
+  flex-wrap: wrap;
+}
+.proc-h {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 5em);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: rgba(0,0,0,0.2);
+  transition: color 0.25s;
+  cursor: pointer;
+}
+.proc-h.on { color: var(--text-dark); }
+
+.proc-switch {
+  width: 60px; height: 32px;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  border-radius: 100px;
+  background: rgba(0,0,0,0.05);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
+}
+.proc-switch.on { background: var(--text-dark); border-color: var(--text-dark); }
+.proc-knob {
+  position: absolute;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  top: 4px; left: 4px;
+  transition: left 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+.proc-switch.on .proc-knob { left: calc(100% - 26px); }
+
+.proc-steps {
+  margin-top: 4em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2em;
+}
+@media (max-width: 768px) { .proc-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .proc-steps { grid-template-columns: 1fr; } }
+
+.pstep {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 18px;
+  padding: 2em 1.8em;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, opacity 0.25s;
+}
+.pstep.highlight {
+  border-color: rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.ps-icon { font-size: 1.6em; margin-bottom: 0.8em; }
+.ps-num  { font-size: 0.7em; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6em; }
+.ps-title { font-weight: 800; font-size: 1.15em; margin-bottom: 0.5em; letter-spacing: -0.01em; }
+.ps-desc  { font-size: 0.82em; color: var(--text-mid); line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS — Animated Cards Stack
+═══════════════════════════════════════ */
+.testi-scroll-section {
+  background: var(--bg-dark);
+  color: #fff;
+}
+.testi-top-header {
+  padding: 6em 3em 0;
+  text-align: center;
+}
+.testi-eyebrow {
+  color: var(--accent);
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.8em;
+}
+.testi-h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 4em);
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.testi-h2-sub {
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.6em;
+}
+
+/* Scroll container */
+.scroll-cards-container {
+  height: 300vh;
+  position: relative;
+}
+.scroll-cards-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+.scroll-cards-vp {
+  perspective: 1000px;
+  position: relative;
+}
+.scroll-cards-inner {
+  position: relative;
+  width: 350px;
+  height: 450px;
+}
+@media (max-width: 480px) {
+  .scroll-cards-inner { width: 290px; height: 390px; }
+}
+
+/* Animated card */
+.ani-card {
+  position: absolute;
+  will-change: transform;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(16px);
+  padding: 2.5em 2em;
+  backface-visibility: hidden;
+}
+.ani-card-top { text-align: center; width: 100%; }
+.ani-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 1.2em;
+}
+.ani-stars svg { width: 18px; height: 18px; flex-shrink: 0; }
+.ani-quote {
+  font-size: clamp(0.85rem, 1.2vw, 1.05em);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  font-weight: 400;
+}
+.ani-quote::before {
+  content: '\201C';
+  color: var(--accent);
+  font-size: 2em;
+  line-height: 0;
+  vertical-align: -0.4em;
+  margin-left: 0.1em;
+}
+.ani-author {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  width: 100%;
+}
+.ani-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.1em;
+  color: var(--accent);
+  background: rgba(247,255,158,0.1);
+}
+.ani-avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+.ani-name { font-weight: 700; font-size: 0.95em; margin-bottom: 0.15em; color: #fff; }
+.ani-role { font-size: 0.78em; color: rgba(255,255,255,0.35); }
+
+/* ═══════════════════════════════════════
+   CTA
+═══════════════════════════════════════ */
+.cta-section {
+  background: var(--bg-hero);
+  padding: 10em 3em;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.06), transparent 70%);
+  pointer-events: none;
+}
+.cta-eyebrow { font-size: 0.72em; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 0.8em; }
+.cta-h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 7vw, 7em);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-dark);
+  margin-bottom: 0.5em;
+  position: relative;
+}
+.cta-sub { font-size: 1em; color: var(--text-mid); margin-bottom: 2.5em; position: relative; }
+.cta-btns { display: flex; gap: 1em; justify-content: center; flex-wrap: wrap; }
+
+.btn-dark {
+  padding: 0.9em 2.2em;
+  background: var(--text-dark);
+  color: #fff;
+  border: none; border-radius: 100px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.95em; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  transition: opacity 0.15s;
+  display: inline-block;
+}
+.btn-dark:hover { opacity: 0.8; }
+.btn-outline-dark {
+  padding: 0.9em 2.2em;
+  background: transparent;
+  color: var(--text-dark);
+  border: 1.5px solid rgba(0,0,0,0.2);
+  border-radius: 100px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.95em; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: border-color 0.15s;
+  display: inline-block;
+}
+.btn-outline-dark:hover { border-color: var(--text-dark); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--bg-dark);
+  color: #fff;
+  padding: 4em 3em 3em;
+}
+.footer-inner { max-width: 1400px; margin: 0 auto; }
+.footer-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 3em; flex-wrap: wrap; gap: 2em;
+  padding-bottom: 3em;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.f-logo { font-weight: 900; font-size: 1.4em; direction: ltr; letter-spacing: 0.08em; }
+.f-links { display: flex; gap: 2em; flex-wrap: wrap; }
+.f-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.85em; transition: color 0.15s; }
+.f-links a:hover { color: #fff; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1em; }
+.f-copy { font-size: 0.8em; color: rgba(255,255,255,0.25); }
+.f-social { display: flex; gap: 0.8em; }
+.f-soc {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.35); text-decoration: none;
+  font-size: 0.78em;
+  transition: border-color 0.15s, color 0.15s;
+}
+.f-soc:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════ */
+.fadeup { opacity: 0; transform: translateY(28px); }
+
+/* stats strip */
+.stats-strip {
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.stats-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: space-around; flex-wrap: wrap;
+}
+.stat-block {
+  padding: 2.5em 2em;
+  text-align: center;
+  flex: 1; min-width: 120px;
+  border-left: 1px solid rgba(0,0,0,0.07);
+}
+.stat-block:last-child { border-right: 1px solid rgba(0,0,0,0.07); }
+.snum {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3.5em);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-dark);
+}
+.slabel { font-size: 0.8em; color: var(--text-mid); margin-top: 0.3em; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo" dir="ltr">PIXELO</a>
+  <ul class="nav-links">
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#portfolio">أعمالنا</a></li>
+    <li><a href="#process">عن الوكالة</a></li>
+    <li><a href="#cta">التسعير</a></li>
+    <li><a href="#cta">تواصل معنا</a></li>
+  </ul>
+  <div class="nav-cta">
+    <div class="nav-cta-dummy">ابدأ مشروعك</div>
+    <a href="#cta" class="nav-cta-real">ابدأ مشروعك</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-heading-area">
+    <h1 class="hero-h1" id="heroH1">
+      <span class="word-1">تصميم مواقع</span>
+      <span class="word-2">يترك أثراً</span>
+    </h1>
+  </div>
+  <div class="hero-sub-row" id="heroSub">
+    <p>نحوّل رؤيتك إلى تجربة رقمية استثنائية. من الفكرة إلى الإطلاق — نبني مواقع تُبهر وتحقق أهدافك.</p>
+  </div>
+
+  <div class="hero-nodes-area" id="heroNodes">
+    <!-- SVG connecting lines -->
+    <svg class="hero-svg" id="heroSVG">
+      <path id="ln1" />
+      <path id="ln2" />
+      <path id="ln3" />
+      <circle id="dot1a" r="4" />
+      <circle id="dot1b" r="4" />
+      <circle id="dot2a" r="4" />
+      <circle id="dot2b" r="4" />
+      <circle id="dot3a" r="4" />
+      <circle id="dot3b" r="4" />
+    </svg>
+
+    <!-- Node: 3D -->
+    <div class="ncard" id="nc-3d">
+      <div class="ncard-header">
+        <span class="ncard-tag">UI</span>
+        <span class="ncard-name">DESIGN</span>
+      </div>
+      <div class="ncard-img-wrap nc-3d-img grad-3d" style="position:relative;">
+        <div class="silhouette">
+          <div>
+            <div style="width:70px;height:50px;background:rgba(255,255,255,0.5);border-radius:50% 50% 0 0;margin:0 auto;"></div>
+            <div style="width:90px;height:70px;background:rgba(255,255,255,0.35);border-radius:8px;margin-top:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Node: Color -->
+    <div class="ncard" id="nc-color">
+      <div class="ncard-header">
+        <span class="ncard-tag">BRAND</span>
+        <span class="ncard-name">IDENTITY</span>
+      </div>
+      <div class="ncard-img-wrap nc-color-img grad-color" style="position:relative;">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#6b21a8 0%,#1a1a3e 60%,#c084fc 100%);opacity:0.8;"></div>
+        <div style="position:absolute;bottom:0;right:0;width:60%;height:60%;background:linear-gradient(135deg,#4ade80,#22d3ee);opacity:0.5;border-radius:50% 0 0 0;"></div>
+      </div>
+    </div>
+
+    <!-- Node: Image (main) -->
+    <div class="ncard" id="nc-img">
+      <div class="ncard-header">
+        <span class="ncard-tag">WEB</span>
+        <span class="ncard-name">DEVELOPMENT</span>
+      </div>
+      <div class="ncard-img-wrap nc-img-img grad-img" style="position:relative;">
+        <div class="silhouette">
+          <div class="sil-person">
+            <div class="sil-head"></div>
+            <div class="sil-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Node: Text -->
+    <div class="ncard" id="nc-text">
+      <div class="ncard-header">
+        <span class="ncard-tag">STRATEGY</span>
+        <span class="ncard-name">PLANNING</span>
+      </div>
+      <div class="nc-text-body">
+        <p>نضع استراتيجية رقمية متكاملة تنطلق من فهم عميق لجمهورك وأهداف علامتك التجارية.</p>
+      </div>
+    </div>
+
+    <!-- Node: Flux -->
+    <div class="ncard" id="nc-flux">
+      <div class="ncard-header">
+        <span class="ncard-tag">UX</span>
+        <span class="ncard-name">EXPERIENCE</span>
+      </div>
+      <div class="ncard-img-wrap nc-flux-img grad-flux" style="position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="width:70px;height:70px;background:rgba(255,255,255,0.08);border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+            <div style="width:40px;height:40px;background:rgba(255,255,255,0.12);border-radius:50%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Node: Video -->
+    <div class="ncard" id="nc-video">
+      <div class="ncard-header">
+        <span class="ncard-tag">LAUNCH</span>
+        <span class="ncard-name">DELIVERY</span>
+      </div>
+      <div class="ncard-img-wrap nc-video-img grad-video" style="position:relative;">
+        <div class="silhouette">
+          <div class="sil-person">
+            <div class="sil-head" style="background:rgba(0,0,0,0.3);"></div>
+            <div class="sil-body" style="background:rgba(0,0,0,0.25);"></div>
+            <div class="sil-bird">
+              <div class="bird-beak"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-nodes-area -->
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="mtrack"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-block fadeup"><div class="snum">+120</div><div class="slabel">مشروع منجز</div></div>
+    <div class="stat-block fadeup"><div class="snum">+85</div><div class="slabel">عميل راضٍ</div></div>
+    <div class="stat-block fadeup"><div class="snum">7</div><div class="slabel">سنوات خبرة</div></div>
+    <div class="stat-block fadeup"><div class="snum">98%</div><div class="slabel">نسبة الرضا</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="srv-gradient">
+    <div class="srv-grad-item sg1 active" id="sg1"></div>
+    <div class="srv-grad-item sg2" id="sg2"></div>
+    <div class="srv-grad-item sg3" id="sg3"></div>
+    <div class="srv-grad-item sg4" id="sg4"></div>
+    <div class="srv-grad-item sg5" id="sg5"></div>
+    <div class="srv-grad-item sg6" id="sg6"></div>
+  </div>
+  <div class="srv-overlay-t"></div>
+  <div class="srv-overlay-b"></div>
+  <div class="srv-inner">
+    <div class="srv-left">
+      <div class="srv-eyebrow">ما نقدمه</div>
+      <h2 class="srv-h2">خدماتنا<br>المتكاملة</h2>
+      <p class="srv-desc">نقدم حلولاً شاملة لبناء حضورك الرقمي من الصفر بأعلى معايير الإبداع والجودة.</p>
+    </div>
+    <div class="srv-list" id="srvList">
+      <div class="srv-item active" data-g="1">
+        <div class="srv-name">تصميم المواقع</div>
+        <div class="srv-sub">تصاميم عصرية تعكس هويتك وتجذب زوارك</div>
+      </div>
+      <div class="srv-item" data-g="2">
+        <div class="srv-name">تطوير الواجهات</div>
+        <div class="srv-sub">برمجة سريعة وتفاعلية بأحدث التقنيات</div>
+      </div>
+      <div class="srv-item" data-g="3">
+        <div class="srv-name">هوية بصرية</div>
+        <div class="srv-sub">شعارات وهوية متكاملة لعلامتك التجارية</div>
+      </div>
+      <div class="srv-item" data-g="4">
+        <div class="srv-name">تجربة المستخدم</div>
+        <div class="srv-sub">تحليل وتحسين رحلة المستخدم لتحقيق أهدافك</div>
+      </div>
+      <div class="srv-item" data-g="5">
+        <div class="srv-name">تطبيقات الجوال</div>
+        <div class="srv-sub">تطبيقات iOS وAndroid بتجربة احترافية سلسة</div>
+      </div>
+      <div class="srv-item" data-g="6">
+        <div class="srv-name">التسويق الرقمي</div>
+        <div class="srv-sub">استراتيجيات مبنية على البيانات والنتائج</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS — light section with floating chips -->
+<section class="tools-section" id="tools">
+  <div class="tools-eyebrow fadeup">الأدوات والتقنيات</div>
+  <h2 class="tools-h2 fadeup">بكل الأدوات التي تحتاجها</h2>
+  <p class="tools-sub fadeup">في منظومة عمل متكاملة وسلسة</p>
+
+  <div class="tools-stage">
+    <!-- Left chips -->
+    <div class="chip-tag ct-crop fadeup">Crop</div>
+    <div class="chip-tag ct-invert fadeup">Invert</div>
+    <div class="chip-tag ct-outpaint fadeup">Outpaint</div>
+    <div class="chip-tag ct-inpaint fadeup">Inpaint</div>
+    <div class="chip-tag ct-mask is-accent fadeup">Mask Extractor</div>
+    <div class="chip-tag ct-upscale fadeup">Upscale</div>
+
+    <!-- Center image -->
+    <div class="tools-center-img">
+      <div class="pottery">
+        <div class="pottery-neck"></div>
+        <div class="pottery-body">
+          <div class="pottery-highlight"></div>
+        </div>
+        <div class="pottery-base"></div>
+      </div>
+    </div>
+
+    <!-- Right chips -->
+    <div class="chip-tag ct-painter fadeup">Painter</div>
+    <div class="chip-tag ct-channels fadeup">Channels</div>
+    <div class="chip-tag ct-describer fadeup">Image Describer</div>
+    <div class="chip-tag ct-relight fadeup">Relight</div>
+    <div class="chip-tag ct-zdepth fadeup">Z Depth Extractor</div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="section-head fadeup">
+    <div class="sec-eyebrow">أعمالنا</div>
+    <h2 class="sec-h2">أعمالنا المميزة</h2>
+  </div>
+  <div class="port-grid">
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi1"></div><div class="port-img-label">LUXE</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">تصميم</span><span class="pchip">تطوير</span><span class="pchip">E-Commerce</span></div>
+        <div class="port-title">Luxe Fashion</div>
+        <div class="port-desc">موقع تجارة إلكترونية فاخر لعلامة أزياء عالمية</div>
+      </div>
+    </div>
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi2"></div><div class="port-img-label">NVA</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">SaaS</span><span class="pchip">UI/UX</span></div>
+        <div class="port-title">Nova Analytics</div>
+        <div class="port-desc">لوحة تحكم تحليلية لشركة تقنية ناشئة</div>
+      </div>
+    </div>
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi3"></div><div class="port-img-label">AQA</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">هوية بصرية</span><span class="pchip">موقع</span></div>
+        <div class="port-title">Aqua Ventures</div>
+        <div class="port-desc">هوية بصرية كاملة وموقع لشركة استثمارية</div>
+      </div>
+    </div>
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi4"></div><div class="port-img-label">SKY</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">تطبيق</span><span class="pchip">iOS</span></div>
+        <div class="port-title">SkyTrack App</div>
+        <div class="port-desc">تطبيق تتبع رياضي بواجهة مستخدم استثنائية</div>
+      </div>
+    </div>
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi5"></div><div class="port-img-label">VRM</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">Landing Page</span><span class="pchip">تحويل</span></div>
+        <div class="port-title">Vermeil Agency</div>
+        <div class="port-desc">صفحة هبوط بتحويل عالٍ لوكالة تسويقية</div>
+      </div>
+    </div>
+    <div class="port-card fadeup">
+      <div class="port-img"><div class="port-img-inner pi6"></div><div class="port-img-label">ZEN</div></div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">Branding</span><span class="pchip">موشن</span></div>
+        <div class="port-title">Zenith Studio</div>
+        <div class="port-desc">هوية بصرية ومحتوى متحرك لاستديو إبداعي</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="process-inner">
+    <div class="sec-eyebrow fadeup">كيف نعمل</div>
+    <div class="proc-toggle-row fadeup">
+      <div class="proc-h on" id="ph1">من الفكرة</div>
+      <div class="proc-switch" id="procSwitch">
+        <div class="proc-knob"></div>
+      </div>
+      <div class="proc-h" id="ph2">إلى الإطلاق</div>
+    </div>
+    <div class="proc-steps">
+      <div class="pstep fadeup" id="ps1">
+        <div class="ps-icon">💡</div>
+        <div class="ps-num">01 — Discovery</div>
+        <div class="ps-title">الاستكشاف</div>
+        <div class="ps-desc">نفهم أهدافك وجمهورك والمشهد التنافسي بعمق قبل أي خطوة.</div>
+      </div>
+      <div class="pstep fadeup" id="ps2">
+        <div class="ps-icon">🎨</div>
+        <div class="ps-num">02 — Design</div>
+        <div class="ps-title">التصميم</div>
+        <div class="ps-desc">نماذج أولية وتصاميم احترافية مع مراجعات غير محدودة.</div>
+      </div>
+      <div class="pstep fadeup" id="ps3">
+        <div class="ps-icon">⚡</div>
+        <div class="ps-num">03 — Develop</div>
+        <div class="ps-title">التطوير</div>
+        <div class="ps-desc">كود نظيف وسريع وقابل للتوسع بأحدث التقنيات.</div>
+      </div>
+      <div class="pstep fadeup highlight" id="ps4">
+        <div class="ps-icon">🚀</div>
+        <div class="ps-num">04 — Launch</div>
+        <div class="ps-title">الإطلاق</div>
+        <div class="ps-desc">نطلق مشروعك ونتابع الأداء للوصول لأفضل النتائج.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS — Animated Cards Stack -->
+<section class="testi-scroll-section" id="testimonials">
+  <div class="testi-top-header">
+    <div class="testi-eyebrow fadeup">آراء عملائنا</div>
+    <h2 class="testi-h2 fadeup">ماذا يقولون عنّا</h2>
+    <p class="testi-h2-sub fadeup">تجارب حقيقية من عملاء وثقوا برؤيتنا</p>
+  </div>
+  <div class="scroll-cards-container" id="scrollCardsContainer">
+    <div class="scroll-cards-sticky">
+      <div class="scroll-cards-vp">
+        <div class="scroll-cards-inner" id="scrollCardsInner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-eyebrow fadeup">هل أنت جاهز؟</div>
+  <h2 class="cta-h2 fadeup">نبني موقعك<br>الاستثنائي</h2>
+  <p class="cta-sub fadeup">تواصل معنا اليوم وابدأ رحلة تحويل رؤيتك إلى واقع رقمي مذهل</p>
+  <div class="cta-btns fadeup">
+    <a href="mailto:hello@pixelo.studio" class="btn-dark">تواصل معنا الآن</a>
+    <a href="#portfolio" class="btn-outline-dark">اطلع على أعمالنا</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-logo" dir="ltr">PIXELO</div>
+      <div class="f-links">
+        <a href="#services">الخدمات</a>
+        <a href="#portfolio">الأعمال</a>
+        <a href="#process">عن الوكالة</a>
+        <a href="#cta">التواصل</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="f-copy">© 2026 PIXELO. جميع الحقوق محفوظة.</div>
+      <div class="f-social">
+        <a href="#" class="f-soc">𝕏</a>
+        <a href="#" class="f-soc">◈</a>
+        <a href="#" class="f-soc">in</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Hero entrance ── */
+window.addEventListener('DOMContentLoaded', () => {
+  gsap.to('#heroH1',  { opacity:1, y:0, duration:1,   ease:'power3.out', delay:0.15 });
+  gsap.to('#heroSub', { opacity:1, y:0, duration:0.8, ease:'power3.out', delay:0.45 });
+
+  gsap.from('#nc-3d',    { opacity:0, y:40, duration:0.8, delay:0.5 });
+  gsap.from('#nc-color', { opacity:0, y:40, duration:0.8, delay:0.7 });
+  gsap.from('#nc-img',   { opacity:0, y:-30,duration:0.9, delay:0.6 });
+  gsap.from('#nc-text',  { opacity:0, y:30, duration:0.8, delay:0.85 });
+  gsap.from('#nc-flux',  { opacity:0, y:40, duration:0.8, delay:0.95 });
+  gsap.from('#nc-video', { opacity:0, y:-30,duration:0.9, delay:0.55 });
+
+  setTimeout(drawLines, 200);
+});
+
+/* ── SVG Lines ── */
+function midpoint(a, b, t=0.5) {
+  return { x: a.x + (b.x - a.x)*t, y: a.y + (b.y - a.y)*t };
+}
+function centerOf(el, container) {
+  const r = el.getBoundingClientRect();
+  const c = container.getBoundingClientRect();
+  return { x: r.left - c.left + r.width/2, y: r.top - c.top + r.height/2 };
+}
+function edgeOf(el, container, side) {
+  const r = el.getBoundingClientRect();
+  const c = container.getBoundingClientRect();
+  const x1 = r.left - c.left, y1 = r.top - c.top;
+  const x2 = x1 + r.width,    y2 = y1 + r.height;
+  if (side==='right')  return { x:x2,          y:(y1+y2)/2 };
+  if (side==='left')   return { x:x1,          y:(y1+y2)/2 };
+  if (side==='bottom') return { x:(x1+x2)/2,   y:y2 };
+  if (side==='top')    return { x:(x1+x2)/2,   y:y1 };
+}
+function curvePath(p1, p2) {
+  const mx = (p1.x + p2.x)/2;
+  return `M${p1.x},${p1.y} C${mx},${p1.y} ${mx},${p2.y} ${p2.x},${p2.y}`;
+}
+function setCircle(id, p) {
+  const el = document.getElementById(id);
+  if (el) { el.setAttribute('cx', p.x); el.setAttribute('cy', p.y); }
+}
+
+function drawLines() {
+  const cont  = document.getElementById('heroNodes');
+  if (!cont) return;
+  const n3d   = document.getElementById('nc-3d');
+  const nclr  = document.getElementById('nc-color');
+  const nimg  = document.getElementById('nc-img');
+  const ntxt  = document.getElementById('nc-text');
+  const nflx  = document.getElementById('nc-flux');
+  const nvid  = document.getElementById('nc-video');
+
+  // Line 1: 3d -> img
+  const p1a = edgeOf(n3d,  cont, 'right');
+  const p1b = edgeOf(nimg, cont, 'left');
+  document.getElementById('ln1').setAttribute('d', curvePath(p1a, p1b));
+  setCircle('dot1a', p1a); setCircle('dot1b', p1b);
+
+  // Line 2: color -> flux -> txt
+  const p2a = edgeOf(nclr, cont, 'right');
+  const p2b = edgeOf(nflx, cont, 'top');
+  document.getElementById('ln2').setAttribute('d', curvePath(p2a, p2b));
+  setCircle('dot2a', p2a); setCircle('dot2b', p2b);
+
+  // Line 3: img -> vid
+  const p3a = edgeOf(nimg, cont, 'right');
+  const p3b = edgeOf(nvid, cont, 'left');
+  document.getElementById('ln3').setAttribute('d', curvePath(p3a, p3b));
+  setCircle('dot3a', p3a); setCircle('dot3b', p3b);
+}
+
+window.addEventListener('resize', drawLines);
+window.addEventListener('scroll', drawLines);
+
+/* ── Draggable nodes ── */
+(function(){
+  document.querySelectorAll('.ncard').forEach(card => {
+    let dragging=false, ox=0, oy=0;
+    card.addEventListener('mousedown', e => {
+      dragging = true;
+      const r = card.getBoundingClientRect();
+      ox = e.clientX - r.left; oy = e.clientY - r.top;
+      card.style.zIndex = 50; e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const cont = document.getElementById('heroNodes').getBoundingClientRect();
+      let x = e.clientX - cont.left - ox;
+      let y = e.clientY - cont.top  - oy;
+      x = Math.max(0, Math.min(x, cont.width  - card.offsetWidth));
+      y = Math.max(0, Math.min(y, cont.height - card.offsetHeight));
+      card.style.left = x+'px'; card.style.top = y+'px';
+      card.style.right='auto';  card.style.bottom='auto';
+      drawLines();
+    });
+    document.addEventListener('mouseup', () => { dragging=false; card.style.zIndex=''; });
+  });
+})();
+
+/* ── Marquee ── */
+(function(){
+  const words = ['تصميم مواقع','هوية بصرية','تطوير واجهات','UI/UX Design','Branding','تطبيقات جوال','Motion Design','SEO','تصميم مواقع','هوية بصرية','تطوير واجهات','UI/UX Design','Branding','تطبيقات جوال'];
+  const t = document.getElementById('mtrack');
+  let h = '';
+  for(let i=0;i<2;i++) words.forEach(w => { h += `<div class="m-item">${w}<span class="m-sep">✦</span></div>`; });
+  t.innerHTML = h;
+})();
+
+/* ── Services scroll-trigger (same as models section) ── */
+(function(){
+  const items = document.querySelectorAll('.srv-item');
+  const grads = [sg1,sg2,sg3,sg4,sg5,sg6];
+  let last = -1;
+
+  function activate(i) {
+    if (i===last) return; last=i;
+    items.forEach((el,j) => el.classList.toggle('active', j===i));
+    grads.forEach((g,j) => g.classList.toggle('active', j===i));
+  }
+
+  items.forEach((item,i) => {
+    ScrollTrigger.create({
+      trigger: item,
+      start: 'top 55%',
+      end:   'bottom 45%',
+      onEnter:     () => activate(i),
+      onEnterBack: () => activate(i)
+    });
+  });
+  activate(0);
+})();
+
+/* ── Reveal animations ── */
+document.querySelectorAll('.fadeup').forEach(el => {
+  gsap.fromTo(el, {opacity:0, y:26}, {
+    opacity:1, y:0, duration:0.65, ease:'power2.out',
+    scrollTrigger: { trigger:el, start:'top 88%', toggleActions:'play none none none' }
+  });
+});
+
+/* ── Process toggle ── */
+(function(){
+  const sw  = document.getElementById('procSwitch');
+  const ph1 = document.getElementById('ph1');
+  const ph2 = document.getElementById('ph2');
+  const steps = [ps1,ps2,ps3,ps4];
+  let on = false;
+
+  sw.addEventListener('click', () => {
+    on = !on;
+    sw.classList.toggle('on', on);
+    ph1.classList.toggle('on', !on);
+    ph2.classList.toggle('on', on);
+    steps.forEach((s,i) => {
+      s.style.transition = `opacity .3s ease ${i*.07}s, transform .3s ease ${i*.07}s`;
+      s.style.opacity   = on ? (i===3?'1':'0.3') : '1';
+      s.style.transform = on ? (i===3?'scale(1.02)':'scale(0.97)') : '';
+    });
+  });
+})();
+
+/* ── Testimonials — Animated Cards Stack ── */
+(function(){
+  const TESTIMONIALS = [
+    {
+      name: 'أحمد الشمري',
+      role: 'المدير التنفيذي، شركة نوفا',
+      rating: 5,
+      quote: 'PIXELO غيّرت نظرتنا لما يمكن أن يكون عليه الموقع. التصميم احترافي، التسليم في الوقت، والفريق متفانٍ بشكل نادر.',
+      initial: 'أ',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80'
+    },
+    {
+      name: 'سارة القحطاني',
+      role: 'مؤسسة، Luxe Brand',
+      rating: 4.5,
+      quote: 'تعاملنا مع عدة وكالات قبلهم، لكن PIXELO تتميز بفهمها العميق للعلامة التجارية وترجمتها لتجربة بصرية لا تُنسى.',
+      initial: 'س',
+      avatar: 'https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=100&q=80'
+    },
+    {
+      name: 'محمد العتيبي',
+      role: 'رئيس التسويق، TechFlow',
+      rating: 5,
+      quote: 'أفضل قرار اتخذناه كان التعاون مع PIXELO. الموقع الجديد رفع معدل التحويل بنسبة 240% في أول شهرين من الإطلاق.',
+      initial: 'م',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80'
+    },
+    {
+      name: 'لينا الزهراني',
+      role: 'مديرة المنتج، Digital Co',
+      rating: 4.5,
+      quote: 'جودة العمل والتواصل طوال المشروع كانت استثنائية. سلّموا بالضبط ما احتجناه وتجاوزوا كل توقعاتنا.',
+      initial: 'ل',
+      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80'
+    }
+  ];
+
+  const arrayLength = TESTIMONIALS.length;
+  const inner     = document.getElementById('scrollCardsInner');
+  const container = document.getElementById('scrollCardsContainer');
+  if (!inner || !container) return;
+
+  /* ── Build star SVG HTML ── */
+  const STAR_PATH = 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z';
+
+  function starsHTML(rating, max) {
+    max = max || 5;
+    const filled = Math.floor(rating);
+    const frac   = rating - filled;
+    const empty  = max - filled - (frac > 0 ? 1 : 0);
+    const gid    = 'hg' + Math.random().toString(36).slice(2);
+    let html = '<div class="ani-stars">';
+    for (let i=0; i<filled; i++)
+      html += `<svg viewBox="0 0 20 20" fill="#F7FF9E"><path d="${STAR_PATH}"/></svg>`;
+    if (frac > 0)
+      html += `<svg viewBox="0 0 20 20"><defs><linearGradient id="${gid}"><stop offset="${frac*100}%" stop-color="#F7FF9E"/><stop offset="${frac*100}%" stop-color="rgba(255,255,255,0.15)"/></linearGradient></defs><path d="${STAR_PATH}" fill="url(#${gid})"/></svg>`;
+    for (let i=0; i<empty; i++)
+      html += `<svg viewBox="0 0 20 20" fill="rgba(255,255,255,0.15)"><path d="${STAR_PATH}"/></svg>`;
+    html += '</div>';
+    return html;
+  }
+
+  /* ── Create card elements ── */
+  const cardEls = TESTIMONIALS.map(function(t, i) {
+    const card = document.createElement('div');
+    card.className = 'ani-card';
+    card.innerHTML = [
+      '<div class="ani-card-top">',
+        starsHTML(t.rating),
+        '<p class="ani-quote">', t.quote, '</p>',
+      '</div>',
+      '<div class="ani-author">',
+        '<div class="ani-avatar">',
+          '<img src="', t.avatar, '" alt="', t.name, '" ',
+               'onerror="this.style.display=\'none\';this.parentElement.textContent=\'', t.initial, '\'"/>',
+        '</div>',
+        '<div>',
+          '<div class="ani-name">', t.name, '</div>',
+          '<div class="ani-role">', t.role, '</div>',
+        '</div>',
+      '</div>'
+    ].join('');
+    inner.appendChild(card);
+    return card;
+  });
+
+  /* ── Math helpers ── */
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function lerp(a, b, t)  { return a + (b - a) * t; }
+
+  /* ── Scroll update — mirrors ContainerScroll + CardTransformed logic ──
+     useScroll offset: ["start center", "end end"]
+     → progress 0 = element top at viewport center
+     → progress 1 = element bottom at viewport bottom               */
+  function updateCards() {
+    var rect      = container.getBoundingClientRect();
+    var vpH       = window.innerHeight;
+    var scrolled  = -rect.top + vpH / 2;
+    var total     = container.offsetHeight - vpH;
+    var progress  = clamp(scrolled / total, 0, 1);
+
+    cardEls.forEach(function(card, cardIdx) {
+      var index = cardIdx + 2;                          // matches demo's index + 2
+      var start = index / (arrayLength + 1);
+      var end   = (index + 1) / (arrayLength + 1);
+
+      /* translateY: 0% → -180% within card's [start, end] range */
+      var yProg = clamp((progress - start) / (end - start), 0, 1);
+      var y     = yProg * -180;
+
+      /* rotate: incrementRotation → 0 within rotateRange */
+      var rStart  = start - 1.5;
+      var rEnd    = end / 1.5;
+      var rProg   = clamp((progress - rStart) / (rEnd - rStart), 0, 1);
+      var initR   = -index + 90;
+      var rotate  = lerp(initR, 0, rProg);
+
+      var tz   = index * 10;
+      var zIdx = (arrayLength - cardIdx) * 10;
+
+      card.style.top       = (cardIdx * 10) + 'px';
+      card.style.zIndex    = zIdx;
+      card.style.transform = 'translateZ(' + tz + 'px) translateY(' + y + '%) rotate(' + rotate + 'deg)';
+    });
+  }
+
+  window.addEventListener('scroll', updateCards, { passive: true });
+  updateCards();
+})();
+
+/* ── Chip tag hover effect on tools section ── */
+document.querySelectorAll('.chip-tag').forEach(c => {
+  c.addEventListener('click', () => c.classList.toggle('active'));
+});
+
+window.addEventListener('load', drawLines);
+</script>
+</body>
+</html>
