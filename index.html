@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PIXELO — وكالة تصميم مواقع</title>
+<title>PIXELO — Web Design Studio</title>
+<meta name="description" content="PIXELO is a web design studio that turns your vision into an exceptional digital experience — from idea to launch. Web design, development, brand identity, UX and more." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 <style>
@@ -36,7 +37,7 @@ html {
 @media (max-width: 700px)  { html { font-size: 2vw; } }
 
 body {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   color: var(--text-dark);
   background: var(--bg-hero);
@@ -56,7 +57,7 @@ body {
 
 .nav-logo {
   padding: 0 1.8em;
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: 1.1em;
   color: #fff;
@@ -150,7 +151,7 @@ body {
 }
 
 .hero-h1 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(3.5rem, 9.5vw, 9.5em);
   line-height: 0.92;
@@ -269,7 +270,7 @@ body {
 .nc-3d-img    { height: 140px; }
 .nc-color-img { height: 100px; }
 .nc-img-img   { height: 200px; }
-.nc-text-body { padding: 0.8em; font-size: 0.72em; color: var(--text-mid); line-height: 1.55; direction: rtl; min-height: 80px; }
+.nc-text-body { padding: 0.8em; font-size: 0.72em; color: var(--text-mid); line-height: 1.55; direction: ltr; min-height: 80px; }
 .nc-flux-img  { height: 130px; }
 .nc-video-img { height: 200px; }
 
@@ -411,7 +412,7 @@ body {
   margin-bottom: 0.8em;
 }
 .srv-h2 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2.2rem, 4.5vw, 4.5em);
   line-height: 1;
@@ -436,7 +437,7 @@ body {
 .srv-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
 
 .srv-name {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(1.8rem, 3.8vw, 3.6em);
   line-height: 1;
@@ -477,7 +478,7 @@ body {
   margin-bottom: 0.8em;
 }
 .tools-h2 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 4vw, 4em);
   letter-spacing: -0.03em;
@@ -609,7 +610,7 @@ body {
   margin-bottom: 0.6em;
 }
 .sec-h2 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 4vw, 4em);
   letter-spacing: -0.03em;
@@ -656,7 +657,7 @@ body {
   font-weight: 900;
   letter-spacing: -0.04em;
   color: rgba(255,255,255,0.18);
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 .pi1 { background: linear-gradient(145deg,#1a1a2e,#16213e); }
 .pi2 { background: linear-gradient(145deg,#1a0533,#2d1b69); }
@@ -681,6 +682,33 @@ body {
 .port-title { font-weight: 800; font-size: 1.1em; margin-bottom: 0.3em; letter-spacing: -0.01em; }
 .port-desc  { font-size: 0.82em; color: var(--text-mid); line-height: 1.5; }
 
+/* live project card (clickable → opens the real site) */
+.port-card { text-decoration: none; color: inherit; display: block; }
+img.port-img-inner { object-fit: cover; }
+.port-live {
+  position: absolute; top: 10px; left: 10px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.62); color: #fff;
+  font-size: 0.6em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.4em 0.8em; border-radius: 100px; backdrop-filter: blur(6px);
+}
+.port-live::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: #3ddc84; animation: livePulse 1.8s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(61,220,132,0.6); }
+  70%  { box-shadow: 0 0 0 6px rgba(61,220,132,0); }
+  100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); }
+}
+.port-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 1em; font-size: 0.82em; font-weight: 700; color: var(--text-dark);
+  border-bottom: 2px solid var(--accent); padding-bottom: 2px;
+  transition: gap 0.15s ease;
+}
+.port-card:hover .port-cta { gap: 12px; }
+
 /* ═══════════════════════════════════════
    PROCESS
 ═══════════════════════════════════════ */
@@ -698,7 +726,7 @@ body {
   flex-wrap: wrap;
 }
 .proc-h {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 5vw, 5em);
   letter-spacing: -0.03em;
@@ -775,7 +803,7 @@ body {
   margin-bottom: 0.8em;
 }
 .testi-h2 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 4vw, 4em);
   letter-spacing: -0.03em;
@@ -895,7 +923,7 @@ body {
 }
 .cta-eyebrow { font-size: 0.72em; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 0.8em; }
 .cta-h2 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(3rem, 7vw, 7em);
   letter-spacing: -0.04em;
@@ -912,7 +940,7 @@ body {
   background: var(--text-dark);
   color: #fff;
   border: none; border-radius: 100px;
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.95em; font-weight: 700;
   cursor: pointer; text-decoration: none;
   transition: opacity 0.15s;
@@ -925,7 +953,7 @@ body {
   color: var(--text-dark);
   border: 1.5px solid rgba(0,0,0,0.2);
   border-radius: 100px;
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.95em; font-weight: 600;
   cursor: pointer; text-decoration: none;
   transition: border-color 0.15s;
@@ -988,7 +1016,7 @@ footer {
 }
 .stat-block:last-child { border-right: 1px solid rgba(0,0,0,0.07); }
 .snum {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 4vw, 3.5em);
   letter-spacing: -0.04em;
@@ -1004,15 +1032,15 @@ footer {
 <nav class="nav">
   <a href="#" class="nav-logo" dir="ltr">PIXELO</a>
   <ul class="nav-links">
-    <li><a href="#services">خدماتنا</a></li>
-    <li><a href="#portfolio">أعمالنا</a></li>
-    <li><a href="#process">عن الوكالة</a></li>
-    <li><a href="#cta">التسعير</a></li>
-    <li><a href="#cta">تواصل معنا</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#process">About</a></li>
+    <li><a href="#cta">Pricing</a></li>
+    <li><a href="#cta">Contact</a></li>
   </ul>
   <div class="nav-cta">
-    <div class="nav-cta-dummy">ابدأ مشروعك</div>
-    <a href="#cta" class="nav-cta-real">ابدأ مشروعك</a>
+    <div class="nav-cta-dummy">Start a project</div>
+    <a href="#cta" class="nav-cta-real">Start a project</a>
   </div>
 </nav>
 
@@ -1020,12 +1048,12 @@ footer {
 <section class="hero" id="hero">
   <div class="hero-heading-area">
     <h1 class="hero-h1" id="heroH1">
-      <span class="word-1">تصميم مواقع</span>
-      <span class="word-2">يترك أثراً</span>
+      <span class="word-1">Websites that</span>
+      <span class="word-2">leave a mark</span>
     </h1>
   </div>
   <div class="hero-sub-row" id="heroSub">
-    <p>نحوّل رؤيتك إلى تجربة رقمية استثنائية. من الفكرة إلى الإطلاق — نبني مواقع تُبهر وتحقق أهدافك.</p>
+    <p>We turn your vision into an exceptional digital experience. From idea to launch — we build websites that impress and deliver on your goals.</p>
   </div>
 
   <div class="hero-nodes-area" id="heroNodes">
@@ -1049,12 +1077,7 @@ footer {
         <span class="ncard-name">DESIGN</span>
       </div>
       <div class="ncard-img-wrap nc-3d-img grad-3d" style="position:relative;">
-        <div class="silhouette">
-          <div>
-            <div style="width:70px;height:50px;background:rgba(255,255,255,0.5);border-radius:50% 50% 0 0;margin:0 auto;"></div>
-            <div style="width:90px;height:70px;background:rgba(255,255,255,0.35);border-radius:8px;margin-top:2px;"></div>
-          </div>
-        </div>
+        <img class="ncard-img" src="assets/card-design.jpg" alt="A modern website UI design on a clean screen" loading="lazy">
       </div>
     </div>
 
@@ -1065,8 +1088,7 @@ footer {
         <span class="ncard-name">IDENTITY</span>
       </div>
       <div class="ncard-img-wrap nc-color-img grad-color" style="position:relative;">
-        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#6b21a8 0%,#1a1a3e 60%,#c084fc 100%);opacity:0.8;"></div>
-        <div style="position:absolute;bottom:0;right:0;width:60%;height:60%;background:linear-gradient(135deg,#4ade80,#22d3ee);opacity:0.5;border-radius:50% 0 0 0;"></div>
+        <img class="ncard-img" src="assets/card-identity.jpg" alt="An abstract brand identity composition in purple, teal and cream" loading="lazy">
       </div>
     </div>
 
@@ -1077,12 +1099,7 @@ footer {
         <span class="ncard-name">DEVELOPMENT</span>
       </div>
       <div class="ncard-img-wrap nc-img-img grad-img" style="position:relative;">
-        <div class="silhouette">
-          <div class="sil-person">
-            <div class="sil-head"></div>
-            <div class="sil-body"></div>
-          </div>
-        </div>
+        <img class="ncard-img" src="assets/card-web.jpg" alt="A laptop showing a modern website with clean code" loading="lazy">
       </div>
     </div>
 
@@ -1093,7 +1110,7 @@ footer {
         <span class="ncard-name">PLANNING</span>
       </div>
       <div class="nc-text-body">
-        <p>نضع استراتيجية رقمية متكاملة تنطلق من فهم عميق لجمهورك وأهداف علامتك التجارية.</p>
+        <p>We craft a complete digital strategy rooted in a deep understanding of your audience and brand goals.</p>
       </div>
     </div>
 
@@ -1104,11 +1121,7 @@ footer {
         <span class="ncard-name">EXPERIENCE</span>
       </div>
       <div class="ncard-img-wrap nc-flux-img grad-flux" style="position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="width:70px;height:70px;background:rgba(255,255,255,0.08);border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
-            <div style="width:40px;height:40px;background:rgba(255,255,255,0.12);border-radius:50%;"></div>
-          </div>
-        </div>
+        <img class="ncard-img" src="assets/card-ux.jpg" alt="A UX wireframe and user-flow diagram on a dark screen" loading="lazy">
       </div>
     </div>
 
@@ -1119,15 +1132,7 @@ footer {
         <span class="ncard-name">DELIVERY</span>
       </div>
       <div class="ncard-img-wrap nc-video-img grad-video" style="position:relative;">
-        <div class="silhouette">
-          <div class="sil-person">
-            <div class="sil-head" style="background:rgba(0,0,0,0.3);"></div>
-            <div class="sil-body" style="background:rgba(0,0,0,0.25);"></div>
-            <div class="sil-bird">
-              <div class="bird-beak"></div>
-            </div>
-          </div>
-        </div>
+        <img class="ncard-img" src="assets/card-launch.jpg" alt="A launched website with an upward analytics growth chart" loading="lazy">
       </div>
     </div>
 
@@ -1142,10 +1147,10 @@ footer {
 <!-- STATS -->
 <div class="stats-strip">
   <div class="stats-inner">
-    <div class="stat-block fadeup"><div class="snum">+120</div><div class="slabel">مشروع منجز</div></div>
-    <div class="stat-block fadeup"><div class="snum">+85</div><div class="slabel">عميل راضٍ</div></div>
-    <div class="stat-block fadeup"><div class="snum">7</div><div class="slabel">سنوات خبرة</div></div>
-    <div class="stat-block fadeup"><div class="snum">98%</div><div class="slabel">نسبة الرضا</div></div>
+    <div class="stat-block fadeup"><div class="snum">120+</div><div class="slabel">Projects delivered</div></div>
+    <div class="stat-block fadeup"><div class="snum">85+</div><div class="slabel">Happy clients</div></div>
+    <div class="stat-block fadeup"><div class="snum">7</div><div class="slabel">Years of experience</div></div>
+    <div class="stat-block fadeup"><div class="snum">98%</div><div class="slabel">Satisfaction rate</div></div>
   </div>
 </div>
 
@@ -1163,34 +1168,34 @@ footer {
   <div class="srv-overlay-b"></div>
   <div class="srv-inner">
     <div class="srv-left">
-      <div class="srv-eyebrow">ما نقدمه</div>
-      <h2 class="srv-h2">خدماتنا<br>المتكاملة</h2>
-      <p class="srv-desc">نقدم حلولاً شاملة لبناء حضورك الرقمي من الصفر بأعلى معايير الإبداع والجودة.</p>
+      <div class="srv-eyebrow">What we do</div>
+      <h2 class="srv-h2">Our complete<br>services</h2>
+      <p class="srv-desc">We deliver end-to-end solutions to build your digital presence from the ground up, at the highest standards of creativity and quality.</p>
     </div>
     <div class="srv-list" id="srvList">
       <div class="srv-item active" data-g="1">
-        <div class="srv-name">تصميم المواقع</div>
-        <div class="srv-sub">تصاميم عصرية تعكس هويتك وتجذب زوارك</div>
+        <div class="srv-name">Web Design</div>
+        <div class="srv-sub">Modern designs that reflect your identity and draw visitors in</div>
       </div>
       <div class="srv-item" data-g="2">
-        <div class="srv-name">تطوير الواجهات</div>
-        <div class="srv-sub">برمجة سريعة وتفاعلية بأحدث التقنيات</div>
+        <div class="srv-name">Frontend Development</div>
+        <div class="srv-sub">Fast, interactive builds with the latest technologies</div>
       </div>
       <div class="srv-item" data-g="3">
-        <div class="srv-name">هوية بصرية</div>
-        <div class="srv-sub">شعارات وهوية متكاملة لعلامتك التجارية</div>
+        <div class="srv-name">Visual Identity</div>
+        <div class="srv-sub">Logos and complete identity systems for your brand</div>
       </div>
       <div class="srv-item" data-g="4">
-        <div class="srv-name">تجربة المستخدم</div>
-        <div class="srv-sub">تحليل وتحسين رحلة المستخدم لتحقيق أهدافك</div>
+        <div class="srv-name">User Experience</div>
+        <div class="srv-sub">Analyzing and refining the user journey to hit your goals</div>
       </div>
       <div class="srv-item" data-g="5">
-        <div class="srv-name">تطبيقات الجوال</div>
-        <div class="srv-sub">تطبيقات iOS وAndroid بتجربة احترافية سلسة</div>
+        <div class="srv-name">Mobile Apps</div>
+        <div class="srv-sub">iOS and Android apps with a smooth, professional experience</div>
       </div>
       <div class="srv-item" data-g="6">
-        <div class="srv-name">التسويق الرقمي</div>
-        <div class="srv-sub">استراتيجيات مبنية على البيانات والنتائج</div>
+        <div class="srv-name">Digital Marketing</div>
+        <div class="srv-sub">Strategies built on data and real results</div>
       </div>
     </div>
   </div>
@@ -1198,9 +1203,9 @@ footer {
 
 <!-- TOOLS — light section with floating chips -->
 <section class="tools-section" id="tools">
-  <div class="tools-eyebrow fadeup">الأدوات والتقنيات</div>
-  <h2 class="tools-h2 fadeup">بكل الأدوات التي تحتاجها</h2>
-  <p class="tools-sub fadeup">في منظومة عمل متكاملة وسلسة</p>
+  <div class="tools-eyebrow fadeup">Tools &amp; tech</div>
+  <h2 class="tools-h2 fadeup">Every tool you need</h2>
+  <p class="tools-sub fadeup">In one seamless, integrated workflow</p>
 
   <div class="tools-stage">
     <!-- Left chips -->
@@ -1234,56 +1239,60 @@ footer {
 <!-- PORTFOLIO -->
 <section class="portfolio-section" id="portfolio">
   <div class="section-head fadeup">
-    <div class="sec-eyebrow">أعمالنا</div>
-    <h2 class="sec-h2">أعمالنا المميزة</h2>
+    <div class="sec-eyebrow">Work</div>
+    <h2 class="sec-h2">Selected work</h2>
   </div>
   <div class="port-grid">
-    <div class="port-card fadeup">
-      <div class="port-img"><div class="port-img-inner pi1"></div><div class="port-img-label">LUXE</div></div>
-      <div class="port-body">
-        <div class="port-chips"><span class="pchip">تصميم</span><span class="pchip">تطوير</span><span class="pchip">E-Commerce</span></div>
-        <div class="port-title">Luxe Fashion</div>
-        <div class="port-desc">موقع تجارة إلكترونية فاخر لعلامة أزياء عالمية</div>
+    <a class="port-card fadeup" href="https://sirocco-perfume.vercel.app/site/index.html" target="_blank" rel="noopener">
+      <div class="port-img">
+        <img class="port-img-inner" src="assets/work-sirocco.jpg" alt="SIROCCO — luxury single-product perfume landing page">
+        <span class="port-live">Live</span>
       </div>
-    </div>
+      <div class="port-body">
+        <div class="port-chips"><span class="pchip">Web Design</span><span class="pchip">Development</span><span class="pchip">Landing Page</span></div>
+        <div class="port-title">SIROCCO — Luxury Perfume</div>
+        <div class="port-desc">A single-product luxury fragrance landing page — atmospheric hero, a three-act notes arc, social proof and a sampling-led CTA. Hand-coded in HTML, CSS &amp; JS.</div>
+        <span class="port-cta">View live site →</span>
+      </div>
+    </a>
     <div class="port-card fadeup">
       <div class="port-img"><div class="port-img-inner pi2"></div><div class="port-img-label">NVA</div></div>
       <div class="port-body">
         <div class="port-chips"><span class="pchip">SaaS</span><span class="pchip">UI/UX</span></div>
         <div class="port-title">Nova Analytics</div>
-        <div class="port-desc">لوحة تحكم تحليلية لشركة تقنية ناشئة</div>
+        <div class="port-desc">An analytics dashboard for a fast-growing tech startup</div>
       </div>
     </div>
     <div class="port-card fadeup">
       <div class="port-img"><div class="port-img-inner pi3"></div><div class="port-img-label">AQA</div></div>
       <div class="port-body">
-        <div class="port-chips"><span class="pchip">هوية بصرية</span><span class="pchip">موقع</span></div>
+        <div class="port-chips"><span class="pchip">Identity</span><span class="pchip">Website</span></div>
         <div class="port-title">Aqua Ventures</div>
-        <div class="port-desc">هوية بصرية كاملة وموقع لشركة استثمارية</div>
+        <div class="port-desc">Full visual identity and website for an investment firm</div>
       </div>
     </div>
     <div class="port-card fadeup">
       <div class="port-img"><div class="port-img-inner pi4"></div><div class="port-img-label">SKY</div></div>
       <div class="port-body">
-        <div class="port-chips"><span class="pchip">تطبيق</span><span class="pchip">iOS</span></div>
+        <div class="port-chips"><span class="pchip">App</span><span class="pchip">iOS</span></div>
         <div class="port-title">SkyTrack App</div>
-        <div class="port-desc">تطبيق تتبع رياضي بواجهة مستخدم استثنائية</div>
+        <div class="port-desc">A fitness-tracking app with an exceptional user interface</div>
       </div>
     </div>
     <div class="port-card fadeup">
       <div class="port-img"><div class="port-img-inner pi5"></div><div class="port-img-label">VRM</div></div>
       <div class="port-body">
-        <div class="port-chips"><span class="pchip">Landing Page</span><span class="pchip">تحويل</span></div>
+        <div class="port-chips"><span class="pchip">Landing Page</span><span class="pchip">Conversion</span></div>
         <div class="port-title">Vermeil Agency</div>
-        <div class="port-desc">صفحة هبوط بتحويل عالٍ لوكالة تسويقية</div>
+        <div class="port-desc">A high-converting landing page for a marketing agency</div>
       </div>
     </div>
     <div class="port-card fadeup">
       <div class="port-img"><div class="port-img-inner pi6"></div><div class="port-img-label">ZEN</div></div>
       <div class="port-body">
-        <div class="port-chips"><span class="pchip">Branding</span><span class="pchip">موشن</span></div>
+        <div class="port-chips"><span class="pchip">Branding</span><span class="pchip">Motion</span></div>
         <div class="port-title">Zenith Studio</div>
-        <div class="port-desc">هوية بصرية ومحتوى متحرك لاستديو إبداعي</div>
+        <div class="port-desc">Visual identity and motion content for a creative studio</div>
       </div>
     </div>
   </div>
@@ -1292,38 +1301,38 @@ footer {
 <!-- PROCESS -->
 <section class="process-section" id="process">
   <div class="process-inner">
-    <div class="sec-eyebrow fadeup">كيف نعمل</div>
+    <div class="sec-eyebrow fadeup">How we work</div>
     <div class="proc-toggle-row fadeup">
-      <div class="proc-h on" id="ph1">من الفكرة</div>
+      <div class="proc-h on" id="ph1">From idea</div>
       <div class="proc-switch" id="procSwitch">
         <div class="proc-knob"></div>
       </div>
-      <div class="proc-h" id="ph2">إلى الإطلاق</div>
+      <div class="proc-h" id="ph2">to launch</div>
     </div>
     <div class="proc-steps">
       <div class="pstep fadeup" id="ps1">
         <div class="ps-icon">💡</div>
         <div class="ps-num">01 — Discovery</div>
-        <div class="ps-title">الاستكشاف</div>
-        <div class="ps-desc">نفهم أهدافك وجمهورك والمشهد التنافسي بعمق قبل أي خطوة.</div>
+        <div class="ps-title">Discovery</div>
+        <div class="ps-desc">We dig deep into your goals, audience, and competitive landscape before any step.</div>
       </div>
       <div class="pstep fadeup" id="ps2">
         <div class="ps-icon">🎨</div>
         <div class="ps-num">02 — Design</div>
-        <div class="ps-title">التصميم</div>
-        <div class="ps-desc">نماذج أولية وتصاميم احترافية مع مراجعات غير محدودة.</div>
+        <div class="ps-title">Design</div>
+        <div class="ps-desc">Prototypes and polished, professional designs with unlimited revisions.</div>
       </div>
       <div class="pstep fadeup" id="ps3">
         <div class="ps-icon">⚡</div>
         <div class="ps-num">03 — Develop</div>
-        <div class="ps-title">التطوير</div>
-        <div class="ps-desc">كود نظيف وسريع وقابل للتوسع بأحدث التقنيات.</div>
+        <div class="ps-title">Development</div>
+        <div class="ps-desc">Clean, fast, scalable code built with the latest technologies.</div>
       </div>
       <div class="pstep fadeup highlight" id="ps4">
         <div class="ps-icon">🚀</div>
         <div class="ps-num">04 — Launch</div>
-        <div class="ps-title">الإطلاق</div>
-        <div class="ps-desc">نطلق مشروعك ونتابع الأداء للوصول لأفضل النتائج.</div>
+        <div class="ps-title">Launch</div>
+        <div class="ps-desc">We launch your project and monitor performance to reach the best results.</div>
       </div>
     </div>
   </div>
@@ -1332,9 +1341,9 @@ footer {
 <!-- TESTIMONIALS — Animated Cards Stack -->
 <section class="testi-scroll-section" id="testimonials">
   <div class="testi-top-header">
-    <div class="testi-eyebrow fadeup">آراء عملائنا</div>
-    <h2 class="testi-h2 fadeup">ماذا يقولون عنّا</h2>
-    <p class="testi-h2-sub fadeup">تجارب حقيقية من عملاء وثقوا برؤيتنا</p>
+    <div class="testi-eyebrow fadeup">Testimonials</div>
+    <h2 class="testi-h2 fadeup">What they say about us</h2>
+    <p class="testi-h2-sub fadeup">Real experiences from clients who trusted our vision</p>
   </div>
   <div class="scroll-cards-container" id="scrollCardsContainer">
     <div class="scroll-cards-sticky">
@@ -1348,12 +1357,12 @@ footer {
 <!-- CTA -->
 <section class="cta-section" id="cta">
   <div class="cta-glow"></div>
-  <div class="cta-eyebrow fadeup">هل أنت جاهز؟</div>
-  <h2 class="cta-h2 fadeup">نبني موقعك<br>الاستثنائي</h2>
-  <p class="cta-sub fadeup">تواصل معنا اليوم وابدأ رحلة تحويل رؤيتك إلى واقع رقمي مذهل</p>
+  <div class="cta-eyebrow fadeup">Ready to start?</div>
+  <h2 class="cta-h2 fadeup">Let's build your<br>standout website</h2>
+  <p class="cta-sub fadeup">Get in touch today and start turning your vision into a stunning digital reality.</p>
   <div class="cta-btns fadeup">
-    <a href="mailto:hello@pixelo.studio" class="btn-dark">تواصل معنا الآن</a>
-    <a href="#portfolio" class="btn-outline-dark">اطلع على أعمالنا</a>
+    <a href="mailto:hello@pixelo.studio" class="btn-dark">Get in touch</a>
+    <a href="#portfolio" class="btn-outline-dark">See our work</a>
   </div>
 </section>
 
@@ -1363,14 +1372,14 @@ footer {
     <div class="footer-top">
       <div class="f-logo" dir="ltr">PIXELO</div>
       <div class="f-links">
-        <a href="#services">الخدمات</a>
-        <a href="#portfolio">الأعمال</a>
-        <a href="#process">عن الوكالة</a>
-        <a href="#cta">التواصل</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Work</a>
+        <a href="#process">About</a>
+        <a href="#cta">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="f-copy">© 2026 PIXELO. جميع الحقوق محفوظة.</div>
+      <div class="f-copy">© 2026 PIXELO. All rights reserved.</div>
       <div class="f-social">
         <a href="#" class="f-soc">𝕏</a>
         <a href="#" class="f-soc">◈</a>
@@ -1485,7 +1494,7 @@ window.addEventListener('scroll', drawLines);
 
 /* ── Marquee ── */
 (function(){
-  const words = ['تصميم مواقع','هوية بصرية','تطوير واجهات','UI/UX Design','Branding','تطبيقات جوال','Motion Design','SEO','تصميم مواقع','هوية بصرية','تطوير واجهات','UI/UX Design','Branding','تطبيقات جوال'];
+  const words = ['Web Design','Visual Identity','Frontend Dev','UI/UX Design','Branding','Mobile Apps','Motion Design','SEO','Web Design','Visual Identity','Frontend Dev','UI/UX Design','Branding','Mobile Apps'];
   const t = document.getElementById('mtrack');
   let h = '';
   for(let i=0;i<2;i++) words.forEach(w => { h += `<div class="m-item">${w}<span class="m-sep">✦</span></div>`; });
@@ -1549,35 +1558,35 @@ document.querySelectorAll('.fadeup').forEach(el => {
 (function(){
   const TESTIMONIALS = [
     {
-      name: 'أحمد الشمري',
-      role: 'المدير التنفيذي، شركة نوفا',
+      name: 'James Carter',
+      role: 'CEO, Nova Inc.',
       rating: 5,
-      quote: 'PIXELO غيّرت نظرتنا لما يمكن أن يكون عليه الموقع. التصميم احترافي، التسليم في الوقت، والفريق متفانٍ بشكل نادر.',
-      initial: 'أ',
+      quote: 'PIXELO changed how we think about what a website can be. The design is world-class, delivered on time, and the team is dedicated in a way that is genuinely rare.',
+      initial: 'J',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80'
     },
     {
-      name: 'سارة القحطاني',
-      role: 'مؤسسة، Luxe Brand',
+      name: 'Sophia Bennett',
+      role: 'Founder, Luxe Brand',
       rating: 4.5,
-      quote: 'تعاملنا مع عدة وكالات قبلهم، لكن PIXELO تتميز بفهمها العميق للعلامة التجارية وترجمتها لتجربة بصرية لا تُنسى.',
-      initial: 'س',
+      quote: 'We worked with several agencies before, but PIXELO stands out for how deeply they understood our brand and turned it into an unforgettable visual experience.',
+      initial: 'S',
       avatar: 'https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=100&q=80'
     },
     {
-      name: 'محمد العتيبي',
-      role: 'رئيس التسويق، TechFlow',
+      name: 'Michael Torres',
+      role: 'Head of Marketing, TechFlow',
       rating: 5,
-      quote: 'أفضل قرار اتخذناه كان التعاون مع PIXELO. الموقع الجديد رفع معدل التحويل بنسبة 240% في أول شهرين من الإطلاق.',
-      initial: 'م',
+      quote: 'The best decision we made was partnering with PIXELO. Our new site lifted conversions by 240% in the first two months after launch.',
+      initial: 'M',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80'
     },
     {
-      name: 'لينا الزهراني',
-      role: 'مديرة المنتج، Digital Co',
+      name: 'Lena Walsh',
+      role: 'Product Manager, Digital Co',
       rating: 4.5,
-      quote: 'جودة العمل والتواصل طوال المشروع كانت استثنائية. سلّموا بالضبط ما احتجناه وتجاوزوا كل توقعاتنا.',
-      initial: 'ل',
+      quote: 'The quality of work and communication throughout the project was exceptional. They delivered exactly what we needed and exceeded every expectation.',
+      initial: 'L',
       avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80'
     }
   ];
