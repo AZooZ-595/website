@@ -709,6 +709,25 @@ img.port-img-inner { object-fit: cover; }
 }
 .port-card:hover .port-cta { gap: 12px; }
 
+/* static badge (non-live, e.g. Shopify) */
+.port-live--static { background: rgba(0,0,0,0.55); }
+.port-live--static::before { display: none; }
+
+/* coming-soon (locked) cards */
+.port-card--soon { cursor: default; }
+.port-card--soon:hover { transform: none; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+.port-card--soon:hover .port-img-inner { transform: none; }
+.port-card--soon .port-img-inner { filter: grayscale(0.35) brightness(0.9); }
+.port-soon {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  background: rgba(14,14,18,0.55);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  color: #fff;
+}
+.port-soon svg { width: 26px; height: 26px; opacity: 0.92; }
+.port-soon span { font-size: 0.66em; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+
 /* ═══════════════════════════════════════
    PROCESS
 ═══════════════════════════════════════ */
@@ -1268,35 +1287,47 @@ footer {
       </div>
     </a>
     <div class="port-card fadeup">
-      <div class="port-img"><div class="port-img-inner pi3"></div><div class="port-img-label">AQA</div></div>
+      <div class="port-img">
+        <img class="port-img-inner" src="assets/work-timestill.jpg" alt="Timestill — yoga &amp; movement studio Shopify theme">
+        <span class="port-live port-live--static">Shopify</span>
+      </div>
       <div class="port-body">
-        <div class="port-chips"><span class="pchip">Identity</span><span class="pchip">Website</span></div>
-        <div class="port-title">Aqua Ventures</div>
-        <div class="port-desc">Full visual identity and website for an investment firm</div>
+        <div class="port-chips"><span class="pchip">Shopify</span><span class="pchip">Theme Design</span><span class="pchip">Yoga</span></div>
+        <div class="port-title">Timestill — Yoga Studio</div>
+        <div class="port-desc">A warm, editorial Shopify theme for a movement &amp; yoga studio — custom sections, scroll-driven color, an interactive testimonial carousel, and a fully owned image system.</div>
       </div>
     </div>
-    <div class="port-card fadeup">
-      <div class="port-img"><div class="port-img-inner pi4"></div><div class="port-img-label">SKY</div></div>
+    <div class="port-card port-card--soon fadeup">
+      <div class="port-img">
+        <img class="port-img-inner" src="assets/card-ux.jpg" alt="">
+        <div class="port-soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Coming soon</span></div>
+      </div>
       <div class="port-body">
         <div class="port-chips"><span class="pchip">App</span><span class="pchip">iOS</span></div>
         <div class="port-title">SkyTrack App</div>
-        <div class="port-desc">A fitness-tracking app with an exceptional user interface</div>
+        <div class="port-desc">New case study in progress — launching soon.</div>
       </div>
     </div>
-    <div class="port-card fadeup">
-      <div class="port-img"><div class="port-img-inner pi5"></div><div class="port-img-label">VRM</div></div>
+    <div class="port-card port-card--soon fadeup">
+      <div class="port-img">
+        <img class="port-img-inner" src="assets/card-launch.jpg" alt="">
+        <div class="port-soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Coming soon</span></div>
+      </div>
       <div class="port-body">
         <div class="port-chips"><span class="pchip">Landing Page</span><span class="pchip">Conversion</span></div>
         <div class="port-title">Vermeil Agency</div>
-        <div class="port-desc">A high-converting landing page for a marketing agency</div>
+        <div class="port-desc">New case study in progress — launching soon.</div>
       </div>
     </div>
-    <div class="port-card fadeup">
-      <div class="port-img"><div class="port-img-inner pi6"></div><div class="port-img-label">ZEN</div></div>
+    <div class="port-card port-card--soon fadeup">
+      <div class="port-img">
+        <img class="port-img-inner" src="assets/card-identity.jpg" alt="">
+        <div class="port-soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Coming soon</span></div>
+      </div>
       <div class="port-body">
         <div class="port-chips"><span class="pchip">Branding</span><span class="pchip">Motion</span></div>
         <div class="port-title">Zenith Studio</div>
-        <div class="port-desc">Visual identity and motion content for a creative studio</div>
+        <div class="port-desc">New case study in progress — launching soon.</div>
       </div>
     </div>
   </div>
