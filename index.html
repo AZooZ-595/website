@@ -592,6 +592,114 @@ body {
 .ct-relight  { top: 62%;  right: 8%; }
 .ct-zdepth   { bottom: 10%; right: 14%; }
 
+/* ── Interactive tool preview (center stage) ───────── */
+.tools-center-img::after { display: none; }
+.tool-canvas {
+  position: absolute; inset: 0;
+  border-radius: 20px; overflow: hidden;
+  background: #cfc6bb;
+}
+.tool-base-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: filter .5s ease, transform .55s cubic-bezier(.22,.61,.36,1), opacity .4s ease;
+  will-change: filter, transform;
+}
+.tool-layer {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity .45s ease;
+  pointer-events: none;
+}
+img.tool-layer { width: 100%; height: 100%; object-fit: cover; }
+
+.tool-fill { background: url('assets/tool-base.jpg') center/cover; filter: blur(18px) brightness(1.07); transform: scale(1.25); }
+.tool-checker {
+  background-color: #fbfbfb;
+  background-image:
+    linear-gradient(45deg,#d6d6d6 25%,transparent 25%),
+    linear-gradient(-45deg,#d6d6d6 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#d6d6d6 75%),
+    linear-gradient(-45deg,transparent 75%,#d6d6d6 75%);
+  background-size: 22px 22px;
+  background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+}
+.tool-light { background: radial-gradient(circle at 70% 26%, rgba(255,244,214,.92), rgba(255,206,150,.18) 40%, rgba(8,5,0,.6) 92%); mix-blend-mode: soft-light; }
+.tool-depth { background: radial-gradient(ellipse 58% 54% at 50% 45%, #ffffff 0%, #9a9a9a 40%, #2a2a2a 78%, #000 100%); mix-blend-mode: multiply; }
+.tool-veil  { background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.18) 55%, rgba(0,0,0,.34)); }
+.tool-split { background: url('assets/tool-base.jpg') center/cover; filter: blur(2.6px) brightness(.98) contrast(.95); clip-path: inset(0 50% 0 0); }
+.tool-split::after { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; box-shadow: 0 0 8px rgba(0,0,0,.45); }
+
+.tool-crop { position: absolute; inset: 13%; opacity: 0; transition: opacity .4s ease; pointer-events: none; z-index: 5; }
+.tool-crop i { position: absolute; width: 22px; height: 22px; border: 2px solid #fff; }
+.tool-crop i:nth-child(1){ top:0; left:0;  border-right:0; border-bottom:0; }
+.tool-crop i:nth-child(2){ top:0; right:0; border-left:0;  border-bottom:0; }
+.tool-crop i:nth-child(3){ bottom:0; left:0;  border-right:0; border-top:0; }
+.tool-crop i:nth-child(4){ bottom:0; right:0; border-left:0;  border-top:0; }
+
+.tool-patch {
+  position: absolute; top: 42%; left: 30%; width: 40%; height: 34%;
+  opacity: 0; transition: opacity .4s ease; pointer-events: none; z-index: 5;
+  border: 2px dashed rgba(255,255,255,.95); border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  animation: patchPulse 1.5s ease-in-out infinite;
+}
+@keyframes patchPulse { 0%,100%{ box-shadow:0 0 0 0 rgba(255,255,255,.4);} 50%{ box-shadow:0 0 0 6px rgba(255,255,255,0);} }
+
+.tool-caption {
+  position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 6;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none; text-align: left;
+}
+.tool-caption .tc-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .58em; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: #0d0d0d; background: var(--accent); padding: .3em .65em; border-radius: 6px; margin-bottom: .55em;
+}
+.tool-caption .tc-text { font-size: .8em; line-height: 1.5; color: #fff; font-weight: 500; min-height: 2.4em; }
+
+.tool-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 7;
+  font-size: .6em; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #fff; background: rgba(13,13,13,.72);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  padding: .45em .85em; border-radius: 100px; pointer-events: none;
+}
+
+/* effect activations */
+.fx-crop .tool-base-img    { transform: scale(1.9) translate(-3%,-7%); }
+.fx-crop .tool-crop        { opacity: 1; }
+.fx-invert .tool-base-img  { filter: invert(1); }
+.fx-outpaint .tool-fill    { opacity: 1; }
+.fx-outpaint .tool-base-img{ transform: scale(.58); border-radius: 10px; box-shadow: 0 0 0 2px rgba(255,255,255,.92), 0 14px 36px rgba(0,0,0,.3); }
+.fx-inpaint .tool-patch    { opacity: 1; }
+.fx-mask .tool-checker     { opacity: 1; }
+.fx-mask .tool-cut         { opacity: 1; }
+.fx-mask .tool-base-img    { opacity: 0; }
+.fx-upscale .tool-split    { opacity: 1; }
+.fx-painter .tool-base-img { filter: saturate(1.85) contrast(1.32) brightness(1.05) blur(.3px); }
+.fx-channels .tool-base-img{ filter: url(#chanFx); }
+.fx-describe .tool-base-img{ filter: brightness(.62) saturate(.9); }
+.fx-describe .tool-veil    { opacity: 1; }
+.fx-describe .tool-caption { opacity: 1; transform: translateY(0); }
+.fx-relight .tool-base-img { filter: brightness(.8) contrast(1.14) saturate(1.06); }
+.fx-relight .tool-light    { opacity: 1; }
+.fx-zdepth .tool-base-img  { filter: grayscale(1) contrast(1.45) brightness(1.12); }
+.fx-zdepth .tool-depth     { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce){
+  .tool-base-img, .tool-layer, .tool-crop, .tool-patch, .tool-caption { transition: none; }
+  .tool-patch { animation: none; }
+}
+
+/* mobile: stack chips below the preview */
+@media (max-width: 760px){
+  .tools-stage { height: auto; flex-wrap: wrap; justify-content: center; gap: .55em; padding: 0 1.1em; }
+  .tools-center-img { flex: 0 0 100%; max-width: 280px; margin: 0 auto 1.4em; order: -1; }
+  .chip-tag { position: static; inset: auto; }
+}
+
 /* ═══════════════════════════════════════
    PORTFOLIO
 ═══════════════════════════════════════ */
@@ -1224,34 +1332,57 @@ footer {
 <section class="tools-section" id="tools">
   <div class="tools-eyebrow fadeup">Tools &amp; tech</div>
   <h2 class="tools-h2 fadeup">Every tool you need</h2>
-  <p class="tools-sub fadeup">In one seamless, integrated workflow</p>
+  <p class="tools-sub fadeup">Click any tool — every effect runs live, right here in your browser.</p>
+
+  <!-- hidden SVG filter for the Channels (RGB-split) effect -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="chanFx" x="-12%" y="-12%" width="124%" height="124%">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+      <feOffset in="r" dx="-7" dy="0" result="ro"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+      <feOffset in="b" dx="7" dy="0" result="bo"/>
+      <feBlend in="ro" in2="g" mode="screen" result="rg"/>
+      <feBlend in="rg" in2="bo" mode="screen"/>
+    </filter>
+  </svg>
 
   <div class="tools-stage">
     <!-- Left chips -->
-    <div class="chip-tag ct-crop fadeup">Crop</div>
-    <div class="chip-tag ct-invert fadeup">Invert</div>
-    <div class="chip-tag ct-outpaint fadeup">Outpaint</div>
-    <div class="chip-tag ct-inpaint fadeup">Inpaint</div>
-    <div class="chip-tag ct-mask is-accent fadeup">Mask Extractor</div>
-    <div class="chip-tag ct-upscale fadeup">Upscale</div>
+    <div class="chip-tag ct-crop fadeup"      data-tool="crop"     data-desc="Trim the frame to the strongest composition.">Crop</div>
+    <div class="chip-tag ct-invert fadeup"    data-tool="invert"   data-desc="Flip every colour to its opposite value.">Invert</div>
+    <div class="chip-tag ct-outpaint fadeup"  data-tool="outpaint" data-desc="Extend the canvas with AI-generated surroundings.">Outpaint</div>
+    <div class="chip-tag ct-inpaint fadeup"   data-tool="inpaint"  data-desc="Select a region and heal or replace it.">Inpaint</div>
+    <div class="chip-tag ct-mask is-accent fadeup" data-tool="mask" data-desc="Lift the subject cleanly off its background.">Mask Extractor</div>
+    <div class="chip-tag ct-upscale fadeup"   data-tool="upscale"  data-desc="Boost resolution and sharpen fine detail.">Upscale</div>
 
-    <!-- Center image -->
-    <div class="tools-center-img">
-      <div class="pottery">
-        <div class="pottery-neck"></div>
-        <div class="pottery-body">
-          <div class="pottery-highlight"></div>
+    <!-- Center interactive preview -->
+    <div class="tools-center-img" id="toolStage">
+      <div class="tool-canvas fx-original" id="toolCanvas">
+        <div class="tool-layer tool-fill"></div>
+        <img class="tool-base-img" id="toolBaseImg" src="assets/tool-base.jpg" alt="A ceramic vase product photo used to preview each tool's effect" loading="lazy">
+        <div class="tool-layer tool-split"></div>
+        <div class="tool-layer tool-checker"></div>
+        <img class="tool-layer tool-cut" src="assets/tool-cut.png" alt="" loading="lazy">
+        <div class="tool-layer tool-depth"></div>
+        <div class="tool-layer tool-light"></div>
+        <div class="tool-layer tool-veil"></div>
+        <div class="tool-crop"><i></i><i></i><i></i><i></i></div>
+        <div class="tool-patch"></div>
+        <div class="tool-caption" id="toolCaption">
+          <span class="tc-tag">✦ AI describe</span>
+          <div class="tc-text" id="toolCaptionText"></div>
         </div>
-        <div class="pottery-base"></div>
       </div>
+      <div class="tool-badge" id="toolBadge">Original</div>
     </div>
 
     <!-- Right chips -->
-    <div class="chip-tag ct-painter fadeup">Painter</div>
-    <div class="chip-tag ct-channels fadeup">Channels</div>
-    <div class="chip-tag ct-describer fadeup">Image Describer</div>
-    <div class="chip-tag ct-relight fadeup">Relight</div>
-    <div class="chip-tag ct-zdepth fadeup">Z Depth Extractor</div>
+    <div class="chip-tag ct-painter fadeup"   data-tool="painter"  data-desc="Re-render the image with a painterly look.">Painter</div>
+    <div class="chip-tag ct-channels fadeup"  data-tool="channels" data-desc="Split the image into its RGB colour channels.">Channels</div>
+    <div class="chip-tag ct-describer fadeup" data-tool="describe" data-desc="">Image Describer</div>
+    <div class="chip-tag ct-relight fadeup"   data-tool="relight"  data-desc="Re-light the scene from a new direction.">Relight</div>
+    <div class="chip-tag ct-zdepth fadeup"    data-tool="zdepth"   data-desc="Extract a depth map of the scene.">Z Depth Extractor</div>
   </div>
 </section>
 
@@ -1721,10 +1852,70 @@ document.querySelectorAll('.fadeup').forEach(el => {
   updateCards();
 })();
 
-/* ── Chip tag hover effect on tools section ── */
-document.querySelectorAll('.chip-tag').forEach(c => {
-  c.addEventListener('click', () => c.classList.toggle('active'));
-});
+/* ── Interactive tools demo: click a chip → apply its real effect ── */
+(function(){
+  const canvas  = document.getElementById('toolCanvas');
+  const badge   = document.getElementById('toolBadge');
+  const capText = document.getElementById('toolCaptionText');
+  const chips   = document.querySelectorAll('.tools-stage .chip-tag');
+  if (!canvas) return;
+
+  const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FX = ['original','crop','invert','outpaint','inpaint','mask','upscale','painter','channels','describe','relight','zdepth'];
+  const DESCRIBE = 'A sculptural matte-ceramic vase, centred on a soft neutral studio backdrop with gentle directional light.';
+  let typeTimer = null;
+
+  function type(el, text){
+    clearTimeout(typeTimer);
+    if (reduce){ el.textContent = text; return; }
+    el.textContent = '';
+    let i = 0;
+    (function step(){
+      if (i <= text.length){ el.textContent = text.slice(0, i++); typeTimer = setTimeout(step, 16); }
+    })();
+  }
+
+  function setTool(tool, label, desc){
+    FX.forEach(f => canvas.classList.remove('fx-' + f));
+    canvas.classList.add('fx-' + tool);
+    badge.textContent = label;
+    if (tool === 'describe') type(capText, DESCRIBE);
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const active = chip.classList.contains('active');
+      chips.forEach(c => c.classList.remove('active'));
+      if (active){                       // clicking the active chip again → reset
+        setTool('original', 'Original', '');
+        return;
+      }
+      chip.classList.add('active');
+      setTool(chip.dataset.tool, chip.textContent.trim(), chip.dataset.desc || '');
+    });
+  });
+
+  /* gentle auto-hint on first view so the section feels alive */
+  if (!reduce && 'IntersectionObserver' in window){
+    const demo = ['crop','invert','mask','zdepth'];
+    let d = 0, played = false;
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !played){
+        played = true; io.disconnect();
+        const tick = () => {
+          if (d >= demo.length){ setTool('original','Original',''); return; }
+          const chip = document.querySelector('.chip-tag[data-tool="'+demo[d]+'"]');
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          setTool(chip.dataset.tool, chip.textContent.trim(), chip.dataset.desc);
+          d++; setTimeout(tick, 1100);
+        };
+        setTimeout(tick, 500);
+      }
+    }, { threshold: 0.45 });
+    io.observe(canvas);
+  }
+})();
 
 window.addEventListener('load', drawLines);
 </script>
